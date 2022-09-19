@@ -21,35 +21,20 @@ bst* init_tree(){
     return t;
 }
 
-void insert(bst* tree, int data){
-    bst_node* n = create_node(data);
-    if (n){
-        if (!tree->root)
-            tree->root = n;
-        else
-            insert(n, tree->root);
-    }
-}
 
 int is_leaf(bst_node* nod){
     return (!nod->left && !nod->right);
 }
 
-void insert(bst_node* new_node, bst_node* nod){
-    if (new_node->data > nod->data)
-    {
-        if (!nod->right)
-           nod->right = new_node;
-        else
-           insert(new_node, nod->right);
+void insert(int data, bst_node*& nod){
+    if (!nod){
+        nod = create_node(data);
+        return;
     }
-    else if (new_node->data < nod->data)
-    {
-        if (!nod->left)
-            nod->left = new_node;
-        else
-            insert(new_node, nod->left);
-    }
+    else if(data > nod->data)
+        insert(data, nod->right);
+    else if (data < nod->data)
+        insert(data, nod->left);
 }
 
 bst_node* search(int data, bst_node *nod){
@@ -79,14 +64,14 @@ void clear(bst_node* &nod){
     }
 }
 
-bst_node* find_bigest_min(bst_node* nod){
+bst_node* successor(bst_node* nod){
 
     while(nod->right)
         nod = nod->right;
     return nod;
 }
 
-bst_node* find_smallest_max(bst_node* nod){
+bst_node* predeccessor(bst_node* nod){
 
     while(nod->left)
         nod = nod->left;
@@ -109,7 +94,7 @@ void del_elem(bst_node*& nod, int data){
             nod = NULL;
         }
         else if (nod->left && nod->right){
-            bst_node* tmp = find_bigest_min(nod->left);
+            bst_node* tmp = successor(nod->left);
             nod->data = (tmp->data);
             del_elem(nod->left, tmp->data);
         }
@@ -157,12 +142,10 @@ int main( void )
 {
     bst* t = init_tree();
 
-    insert(t, 11 );
-    insert(t, 7 );
-    insert(t, 9 );
-    insert(t, 15 );
-    insert(t, 105 );   insert(t, 10005 );   insert(t, 15831 );  insert(t, 24615 );   insert(t, 100315 );   insert(t, 17515 );   insert(t, 123455 );   insert(t, 45215 );   insert(t, 15743 );   insert(t, 666615 );   insert(t, 165 );   insert(t, 415 );   insert(t, 1115 );   insert(t, 1522 );   insert(t, 152 );   insert(t, 157 );   insert(t, 915 );   insert(t, 1599 );   insert(t, 15568 );   insert(t, 15000 );   insert(t, 1500000 );
-
+    insert(11, t->root );
+    insert(7,t->root);
+    insert(9,t->root);
+    insert(15,t->root );
     // preOrderTraverse( t->root, printData );
     del_elem(t->root, 123455 );
     preOrderTraverse( t->root, printData );
