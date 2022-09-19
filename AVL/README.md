@@ -2,7 +2,7 @@ A step-by-step explanation.
 
 ### Table of content:
 
-    1 -**what is a Binary Search Tree (BST)?**
+    1 -  ** what is a Binary Search Tree (BST)?**
 
     2 -**Why BST?**
 
