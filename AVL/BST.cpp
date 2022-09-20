@@ -1,4 +1,4 @@
-#include "BST.hpp"
+#include "AVL.hpp"
 
 using namespace std;
 
@@ -112,44 +112,34 @@ void        printData( int data ) {
     std::cout << data << " " << std::endl;
 }
 
-void  inOrderTraverse( const bst_node* node, void ( *f )( int ) ) {
+// void  inOrderTraverse( const bst_node* node, void ( *f )( int , AVL) ) {
+//     if ( node ) {
+//         inOrderTraverse( node->left, f );
+//         f( node->data );
+//         inOrderTraverse( node->right, f );
+//     }
+// }
+
+void preOrderTraverse( const bst_node* node, void ( *f )( bst_node*  , AVL t), AVL t) {
     if ( node ) {
-        inOrderTraverse( node->left, f );
-        f( node->data );
-        inOrderTraverse( node->right, f );
+        f( const_cast <bst_node *> (node) , t);
+        preOrderTraverse( node->left, f , t);
+        preOrderTraverse( node->right, f , t);
     }
 }
 
-void preOrderTraverse( const bst_node* node, void ( *f )( int ) ) {
+void preOrderTraverse( const bst_node* node, void ( *f )( int)) {
     if ( node ) {
-        f( node->data );
-        preOrderTraverse( node->left, f );
-        preOrderTraverse( node->right, f );
+        f(node->data);
+        preOrderTraverse( node->left, f);
+        preOrderTraverse( node->right, f);
     }
 }
 
-void  postOrderTraverse( const bst_node* node, void ( *f )( int ) ) {
-    if ( node ) {
-        postOrderTraverse( node->left, f );
-        postOrderTraverse( node->right, f );
-        f( node->data );
-    }
-}
-
-using namespace std;
-
-int main( void )
-{
-    bst* t = init_tree();
-
-    insert(11, t->root );
-    insert(7,t->root);
-    insert(9,t->root);
-    insert(15,t->root );
-    // preOrderTraverse( t->root, printData );
-    del_elem(t->root, 123455 );
-    preOrderTraverse( t->root, printData );
-    clear(t->root);
-    preOrderTraverse( t->root, printData );
-    delete t;
-}
+// void  postOrderTraverse( const bst_node* node, void ( *f )( int ) ) {
+//     if ( node ) {
+//         postOrderTraverse( node->left, f );
+//         postOrderTraverse( node->right, f );
+//         f( node->data );
+//     }
+// }
