@@ -98,8 +98,7 @@ void    AVL::left_right_rotate(bst_node*& node){
 }
 
 
-void    AVL::insert_and_Balence(bst_node*& node, int data){
-    insert(data, node);
+void    AVL::balence(bst_node*& node){
     int balenceStatus = this->balenced(node);
     // std::cout << "bf: " << balenceFactor << std::endl;
     switch (balenceStatus)
@@ -125,4 +124,21 @@ void    AVL::insert_and_Balence(bst_node*& node, int data){
             break;
         }
     }
+}
+
+void    AVL::insert_and_Balence(bst_node*& node, int data){
+    insert(data, node);
+    this->balence(node);
+}
+
+void    AVL::delete_and_Balence(bst_node*& node, int data){
+    del_elem(node, data);
+    this->balence(node);
+}
+
+void    AVL::exist(int data){
+    if (search(data, this->tree->root))
+        std::cout << "exist" << std::endl;
+    else
+        std::cout <<  " not found! "<< std::endl;   
 }
