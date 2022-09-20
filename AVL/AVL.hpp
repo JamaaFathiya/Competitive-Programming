@@ -44,12 +44,14 @@ class AVL{
         int  height(bst_node* node);
         int  balence_factor(bst_node* node);
         int  balenced(bst_node* node);
-        void balence();
+        void balence(bst_node*& node);
         void left_rotate(bst_node*& node);
         void right_rotate(bst_node*& node);
         void left_right_rotate(bst_node*& node);
         void right_left_rotate(bst_node*& node);
         void insert_and_Balence(bst_node*& node, int data);
+        void delete_and_Balence(bst_node*& node, int data);
+        void exist(int data);
 };
 
 void printBalenceState(bst_node* node, AVL t);
