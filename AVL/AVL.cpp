@@ -2,7 +2,7 @@
 
 AVL::AVL()
 {
-
+    // std::cout << "constructor" << std::endl;
 }
 
 AVL::~AVL(){
