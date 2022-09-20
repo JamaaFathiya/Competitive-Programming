@@ -6,7 +6,7 @@ AVL::AVL()
 }
 
 AVL::~AVL(){
-
+    // std::cout << "destructor" << std::endl;
 }
 
 int AVL::height(bst_node* node){
